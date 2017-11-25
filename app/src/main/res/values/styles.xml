@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- text theme. -->
+    <style name="TextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhiteText</item>
+    </style>
+    <style name="TextStyle.h1">
+        <item name="android:textSize">150sp</item>
+    </style>
+    <style name="TextStyle.h2">
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="TextStyle.h3">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- layout theme. -->
+    <style name="ParentLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/background_gradient</item>
+        <item name="android:padding">@dimen/size_16dp</item>
+    </style>
+    <style name="LinearLayoutStyle_h2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/size_16dp</item>
+    </style>
+    <!-- image theme. -->
+    <style name="ImageStyle_h2">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

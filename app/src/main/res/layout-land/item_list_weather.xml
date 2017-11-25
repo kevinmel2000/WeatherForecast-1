@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/size_8dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:background="@color/colorAccent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/iv_item_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                app:srcCompat="@drawable/rain" />
+
+            <TextView
+                android:id="@+id/tv_item_temperature"
+                style="@style/TextStyle.h2"
+                android:layout_toRightOf="@id/iv_item_icon"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:text="99"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignTop="@+id/tv_item_temperature"
+                android:layout_toEndOf="@+id/tv_item_temperature"
+                android:layout_toRightOf="@+id/tv_item_temperature"
+                app:srcCompat="@drawable/degree" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_item_day"
+            style="@style/TextStyle.h2"
+            android:layout_width="wrap_content"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:text="Wednesday" />
+    </LinearLayout>
+</RelativeLayout>

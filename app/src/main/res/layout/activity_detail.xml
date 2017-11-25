@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ParentLayout"
+    tools:context="com.training.leos.weatherforecast.ui.DetailActivity">
+
+    <LinearLayout
+        style="@style/LinearLayoutStyle_h2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_detail_location"
+            style="@style/TextStyle.h2"
+            tools:text="Bali Island" />
+
+        <TextView
+            android:id="@+id/tv_detail_current_date"
+            style="@style/TextStyle.h3"
+            android:textStyle="italic"
+            tools:text="Sunday, August 28th, 2017" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_detail_temperature"
+        style="@style/TextStyle.h1"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="--" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_detail_temperature"
+        android:layout_toEndOf="@+id/tv_detail_temperature"
+        android:layout_toRightOf="@+id/tv_detail_temperature"
+        app:srcCompat="@drawable/degree" />
+
+    <ImageView
+        android:id="@+id/iv_detail_icon"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/tv_detail_temperature"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/fog" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        style="@style/LinearLayoutStyle_h2"
+        android:layout_below="@+id/tv_detail_temperature"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle.h3"
+                android:text="HUMIDIDTY" />
+
+            <TextView
+                android:id="@+id/tv_detail_humidity_value"
+                style="@style/TextStyle.h2"
+                android:text="--"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_detail_precip_label"
+                style="@style/TextStyle.h3"
+                android:text="RAIN/SNOW?" />
+
+            <TextView
+                android:id="@+id/tv_detail_precip_value"
+                style="@style/TextStyle.h2"
+                android:text="--"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_detail_summary"
+        style="@style/TextStyle.h3"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:text="Getting current weather..."
+        android:textAlignment="center" />
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_main_current"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_main_location"
+            style="@style/TextStyle.h2"
+            android:text="--"
+            tools:text="Bali Island" />
+
+        <TextView
+            android:id="@+id/tv_main_current_date"
+            style="@style/TextStyle.h3"
+            android:text="--"
+            android:textStyle="italic"
+            tools:text="Sunday, August 28th, 2017" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_main_icon"
+        app:srcCompat="@drawable/sunny"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_main_temperature"
+            style="@style/TextStyle.h1"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="--"
+            android:textAlignment="center"
+            android:textSize="80sp" />
+
+        <ImageView
+            android:id="@+id/iv_main_degree"
+            app:srcCompat="@drawable/degree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tv_main_temperature"
+            android:layout_toEndOf="@+id/tv_main_temperature"
+            android:layout_toRightOf="@+id/tv_main_temperature" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_main_summary"
+        style="@style/TextStyle.h3"
+        android:layout_gravity="center"
+        android:text="Getting summary information..." />
+</LinearLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_current_weather" type="fraction">50%</item>
+    <item name="item_list_weather" type="fraction">30%</item>
+</resources>
