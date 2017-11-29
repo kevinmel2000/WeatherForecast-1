@@ -1,39 +1,39 @@
 package com.training.leos.weatherforecast.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.training.leos.weatherforecast.adapter.ListViewForecastAdapater;
+import com.training.leos.weatherforecast.ui.adapter.ListViewForecastAdapater;
 import com.training.leos.weatherforecast.R;
-import com.training.leos.weatherforecast.model.Currently;
-import com.training.leos.weatherforecast.model.Daily;
-import com.training.leos.weatherforecast.presenter.InterfaceMVP;
+import com.training.leos.weatherforecast.data.model.Currently;
+import com.training.leos.weatherforecast.data.model.Daily;
+import com.training.leos.weatherforecast.presenter.MainContract;
 import com.training.leos.weatherforecast.presenter.MainPresenter;
 import com.training.leos.weatherforecast.util.ItemClickSupport;
 
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements InterfaceMVP.MvpMainActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.MvpMainActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.rv_weather) RecyclerView rv_weather;
-    @BindView(R.id.tv_main_location) TextView tvLocation;
-    @BindView(R.id.tv_main_current_date) TextView tvDate;
     @BindView(R.id.tv_main_temperature) TextView tvTemperature;
     @BindView(R.id.tv_main_summary) TextView tvSummary;
     @BindView(R.id.iv_main_icon) ImageView imgIcon;
+    @BindView(R.id.main_act_toolbar) Toolbar toolbar;
 
     private MainPresenter mainPresenter;
 
@@ -43,14 +43,21 @@ public class MainActivity extends AppCompatActivity implements InterfaceMVP.MvpM
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         mainPresenter = new MainPresenter(this);
         mainPresenter.onInitialize();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -60,28 +67,30 @@ public class MainActivity extends AppCompatActivity implements InterfaceMVP.MvpM
 
     @Override
     public void showCurrentWeather(Currently currently) {
-        tvLocation.setText(currently.getTimezone());
-        tvDate.setText(currently.getFormatedDate());
+        toolbar.setTitle(currently.getTimezone());
+        toolbar.setSubtitle(currently.getFormatedDate());
+        setSupportActionBar(toolbar);
+
         tvTemperature.setText(currently.getTemperature() + "");
         tvSummary.setText(currently.getSummary());
         imgIcon.setImageResource(currently.getIconId());
     }
 
     @Override
-    public void showDailyWeather(final ArrayList<Daily> dailies) {
+    public void showDailyWeather(final Daily daily) {
         ListViewForecastAdapater listViewForecastAdapater = new ListViewForecastAdapater(this);
-        listViewForecastAdapater.setDailyData(dailies);
+        listViewForecastAdapater.setDailyData(daily.getDailies());
         rv_weather.setAdapter(listViewForecastAdapater);
 
         ItemClickSupport.addTo(rv_weather).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_DAILY, dailies.get(position));
-                startActivity(intent);
+                DetailActivity.startActivity(MainActivity.this, daily.getDailies().get(position));
             }
         });
     }
+
+
 
     // ??????
     private boolean isNetworkAvailable() {

@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:id="@+id/linearLayout_main_current"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_main_location"
-            style="@style/TextStyle.h2"
-            android:text="--"
-            tools:text="Bali Island" />
-
-        <TextView
-            android:id="@+id/tv_main_current_date"
-            style="@style/TextStyle.h3"
-            android:text="--"
-            android:textStyle="italic"
-            tools:text="Sunday, August 28th, 2017" />
-    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_main_icon"

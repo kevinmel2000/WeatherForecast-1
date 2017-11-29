@@ -6,8 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionOverflowButtonStyle">@style/overflowButtonStyle</item>
     </style>
-
+    <style name="overflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorWhiteText</item>
+    </style>
     <!-- text theme. -->
     <style name="TextStyle">
         <item name="android:layout_width">wrap_content</item>
@@ -23,7 +26,10 @@
     <style name="TextStyle.h3">
         <item name="android:textSize">14sp</item>
     </style>
-
+    <style name="TextStyle.h3.italic">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
     <!-- layout theme. -->
     <style name="ParentLayout">
         <item name="android:layout_width">match_parent</item>
@@ -36,9 +42,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/size_16dp</item>
     </style>
+
     <!-- image theme. -->
     <style name="ImageStyle_h2">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- more -->
+    <style name="action_setting_dot">
+        <item name="android:textColorSecondary">@color/colorWhiteText</item>
     </style>
 </resources>

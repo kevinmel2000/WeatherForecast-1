@@ -5,10 +5,6 @@ import android.view.View;
 
 import com.training.leos.weatherforecast.R;
 
-/**
- * Created by Leo on 29/10/2017.
- */
-
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;
     private OnItemClickListener mOnItemClickListener;

@@ -1,45 +1,81 @@
-package com.training.leos.weatherforecast.model;
+package com.training.leos.weatherforecast.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
 import com.training.leos.weatherforecast.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Leo on 29/10/2017.
- */
+public class Currently implements Parcelable {
+    @SerializedName("icon") private String icon;
+    @SerializedName("time") private long time;
+    @SerializedName("temperature") private double temperature;
+    @SerializedName("humidity") private double humidity;
+    @SerializedName("precipProbability") private double precipProbability;
+    @SerializedName("summary") private String summary;
 
-public class Daily implements Parcelable {
-    private String icon;
-    private long time;
-    private double temperature;
-    private double humidity;
-    private double precipProbability;
-    private String summary;
     private String timezone;
-
-    public Daily() {
-    }
-
-    public Daily(JSONObject jsonObject) throws JSONException {
-        this.icon = jsonObject.getString("icon");
-        this.time = jsonObject.getLong("time");
-        this.temperature = jsonObject.getDouble("temperatureLow");
-        this.humidity = jsonObject.getDouble("humidity");
-        this.precipProbability = jsonObject.getDouble("precipProbability");
-        this.summary = jsonObject.getString("summary");
-    }
 
     public String getIcon() {
         return icon;
     }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public int getTemperature() {
+        return (int) Math.round(temperature);
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public double getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
+    }
+
+    public double getPrecipProbability() {
+        return precipProbability;
+    }
+
+    public void setPrecipProbability(double precipProbability) {
+        this.precipProbability = precipProbability;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+
     public int getIconId(){
         int iconId = R.drawable.clear_day;
         switch (icon) {
@@ -78,13 +114,7 @@ public class Daily implements Parcelable {
         }
         return iconId;
     }
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
 
-    public long getTime() {
-        return time;
-    }
     public String getFormatedDate(){
         Date date = new Date(getTime()*1000L);
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
@@ -105,51 +135,6 @@ public class Daily implements Parcelable {
         return formatedDay;
     }
 
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public int getTemperature() {
-        return (int) Math.round(temperature);
-    }
-
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
-    public double getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public String getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
-    }
-
-    public int getPrecipProbability() {
-        return (int) Math.round(precipProbability * 100);
-    }
-
-    public void setPrecipProbability(double precipProbability) {
-        this.precipProbability = precipProbability;
-    }
-
-
     @Override
     public int describeContents() {
         return 0;
@@ -166,7 +151,10 @@ public class Daily implements Parcelable {
         dest.writeString(this.timezone);
     }
 
-    protected Daily(Parcel in) {
+    public Currently() {
+    }
+
+    protected Currently(Parcel in) {
         this.icon = in.readString();
         this.time = in.readLong();
         this.temperature = in.readDouble();
@@ -176,15 +164,15 @@ public class Daily implements Parcelable {
         this.timezone = in.readString();
     }
 
-    public static final Parcelable.Creator<Daily> CREATOR = new Parcelable.Creator<Daily>() {
+    public static final Parcelable.Creator<Currently> CREATOR = new Parcelable.Creator<Currently>() {
         @Override
-        public Daily createFromParcel(Parcel source) {
-            return new Daily(source);
+        public Currently createFromParcel(Parcel source) {
+            return new Currently(source);
         }
 
         @Override
-        public Daily[] newArray(int size) {
-            return new Daily[size];
+        public Currently[] newArray(int size) {
+            return new Currently[size];
         }
     };
 }

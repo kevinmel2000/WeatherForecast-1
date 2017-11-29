@@ -1,5 +1,7 @@
 package com.training.leos.weatherforecast.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.training.leos.weatherforecast.R;
-import com.training.leos.weatherforecast.model.Daily;
+import com.training.leos.weatherforecast.data.model.Data;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,13 +32,20 @@ public class DetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Daily daily = getIntent().getParcelableExtra(EXTRA_DAILY);
-        tvLocation.setText(daily.getTimezone());
-        tvCurrentDate.setText(daily.getFormatedDate());
-        imgIcon.setImageDrawable(ContextCompat.getDrawable(this, daily.getIconId()));
-        tvTemperature.setText(daily.getTemperature() + "");
-        tvHumidityValue.setText(daily.getHumidity() + "");
-        tvPrecipValue.setText(daily.getPrecipProbability() + "%");
-        tvSummary.setText(daily.getSummary());
+        Data data = getIntent().getParcelableExtra(EXTRA_DAILY);
+        tvLocation.setText(data.getTimezone());
+        tvCurrentDate.setText(data.getFormatedDate());
+        imgIcon.setImageDrawable(ContextCompat.getDrawable(this, data.getIconId()));
+        tvTemperature.setText(data.getTemperature() + "");
+        tvHumidityValue.setText(data.getHumidity() + "");
+        tvPrecipValue.setText(data.getPrecipProbability() + "%");
+        tvSummary.setText(data.getSummary());
     }
+
+    public static void startActivity(Context context, Data data){
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(EXTRA_DAILY, data);
+        context.startActivity(intent);
+    }
+
 }

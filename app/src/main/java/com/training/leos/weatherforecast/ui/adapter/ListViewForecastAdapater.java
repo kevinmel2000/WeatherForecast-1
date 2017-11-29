@@ -1,4 +1,4 @@
-package com.training.leos.weatherforecast.adapter;
+package com.training.leos.weatherforecast.ui.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
@@ -10,9 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.training.leos.weatherforecast.R;
-import com.training.leos.weatherforecast.model.Daily;
+import com.training.leos.weatherforecast.data.model.Data;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by Leo on 29/10/2017.
@@ -20,14 +23,14 @@ import java.util.ArrayList;
 
 public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForecastAdapater.ListViewHolder>{
     private Context context;
-    private ArrayList<Daily> dailyData = new ArrayList<>();
+    private ArrayList<Data> data = new ArrayList<>();
 
-    public ArrayList<Daily> getDailyData() {
-        return dailyData;
+    public ArrayList<Data> getDailyData() {
+        return data;
     }
 
-    public void setDailyData(ArrayList<Daily> dailyData) {
-        this.dailyData = dailyData;
+    public void setDailyData(ArrayList<Data> data) {
+        this.data = data;
         notifyDataSetChanged();
     }
 
@@ -44,7 +47,7 @@ public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForec
 
     @Override
     public void onBindViewHolder(ListViewHolder holder, int position) {
-        Daily daily = getDailyData().get(position);
+        Data daily = getDailyData().get(position);
         holder.imgIcon.setImageDrawable(ContextCompat.getDrawable(context, daily.getIconId()));
         holder.tvDay.setText(daily.getFormatedDay());
         holder.tvTemperature.setText(daily.getTemperature() + "");
@@ -56,14 +59,12 @@ public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForec
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgIcon;
-        TextView tvDay;
-        TextView tvTemperature;
+        @BindView(R.id.iv_item_icon) ImageView imgIcon;
+        @BindView(R.id.tv_item_day) TextView tvDay;
+        @BindView(R.id.tv_item_temperature) TextView tvTemperature;
         public ListViewHolder(View itemView) {
             super(itemView);
-            imgIcon = (ImageView) itemView.findViewById(R.id.iv_item_icon);
-            tvDay = (TextView) itemView.findViewById(R.id.tv_item_day);
-            tvTemperature = (TextView) itemView.findViewById(R.id.tv_item_temperature);
+            ButterKnife.bind(itemView);
         }
     }
 }
