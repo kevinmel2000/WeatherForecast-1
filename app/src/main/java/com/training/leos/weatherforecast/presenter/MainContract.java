@@ -10,14 +10,15 @@ import com.training.leos.weatherforecast.data.model.Forecast;
 
 public interface MainContract {
     // MainPresenter -> MainActivity
-    interface MvpMainActivity{
+    interface MainActivity {
+        //show message toast
         void showToast(String msg);
         void showCurrentWeather(Currently currently);
         void showDailyWeather(Daily daily);
     }
 
     //MainActivity -> MainPresenter
-    interface MvpMainPresenter{
+    interface MainPresenter {
         void onInitialize();
         void onShowCurrently(Forecast forecast);
         void onShowDaily(Forecast forecast);

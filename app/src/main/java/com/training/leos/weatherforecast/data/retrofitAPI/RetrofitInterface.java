@@ -6,10 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-/**
- * Created by Leo on 26/11/2017.
- */
-
 public interface RetrofitInterface {
     @GET("forecast/eb22e617fa693ad59b19c4e92c0e2ef1/{location}")
     Call<Forecast> getForecast(@Path("location") String location);

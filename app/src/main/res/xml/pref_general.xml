@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Notification">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="daily_reminder"
+            android:title="Daily Reminder" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Service">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="automatic_update"
+            android:title="Auto Update Forecast"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -14,19 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.training.leos.weatherforecast.presenter.MainPresenter;
 import com.training.leos.weatherforecast.ui.adapter.ListViewForecastAdapater;
 import com.training.leos.weatherforecast.R;
 import com.training.leos.weatherforecast.data.model.Currently;
 import com.training.leos.weatherforecast.data.model.Daily;
 import com.training.leos.weatherforecast.presenter.MainContract;
-import com.training.leos.weatherforecast.presenter.MainPresenter;
 import com.training.leos.weatherforecast.util.ItemClickSupport;
 
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainContract.MvpMainActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.MainActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.rv_weather) RecyclerView rv_weather;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpM
     @BindView(R.id.iv_main_icon) ImageView imgIcon;
     @BindView(R.id.main_act_toolbar) Toolbar toolbar;
 
-    private MainPresenter mainPresenter;
+    private MainContract.MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpM
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        mainPresenter = new MainPresenter(this);
-        mainPresenter.onInitialize();
+        NetworkInfo networkInfo = ((ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        if (networkInfo != null) {
+            mainPresenter = new MainPresenter(this);
+            mainPresenter.onInitialize();
+        }
     }
 
     @Override
@@ -88,19 +92,5 @@ public class MainActivity extends AppCompatActivity implements MainContract.MvpM
                 DetailActivity.startActivity(MainActivity.this, daily.getDailies().get(position));
             }
         });
-    }
-
-
-
-    // ??????
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        boolean isActive = false;
-        if (networkInfo != null) {
-            isActive = true;
-        }
-        return isActive;
     }
 }
