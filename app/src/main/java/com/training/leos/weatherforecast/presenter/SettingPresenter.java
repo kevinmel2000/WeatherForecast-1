@@ -8,7 +8,7 @@ import com.training.leos.weatherforecast.util.broadcast.ReminderReceiver;
 import com.training.leos.weatherforecast.data.sharedPreference.ReminderPreference;
 
 public class SettingPresenter implements SettingContract.SettingPresenter{
-    //this actually unnecessary
+    //this actually unnecessary..yep
     private DataContract.SharedPreference preferenceManager;
 
     private ReminderReceiver reminderReceiver;
