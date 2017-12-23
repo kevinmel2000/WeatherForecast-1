@@ -19,14 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.DetailActivity" />
-        <activity
-            android:name=".ui.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.training.leos.weatherforecast.ui.MainActivity" />
-        </activity>
 
         <receiver
             android:name=".util.broadcast.ReminderReceiver"

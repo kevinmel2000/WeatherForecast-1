@@ -10,7 +10,7 @@
     tools:context="com.training.leos.weatherforecast.ui.MainActivity">
 
     <include
-        layout="@layout/main_current_weather"
+        layout="@layout/custom_current_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="6"/>

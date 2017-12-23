@@ -1,4 +1,4 @@
-package com.training.leos.weatherforecast.data.sharedPreference;
+package com.training.leos.weatherforecast.data.sharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

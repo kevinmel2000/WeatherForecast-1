@@ -20,6 +20,22 @@ public class Currently implements Parcelable {
 
     private String timezone;
 
+    public Currently(String icon,
+                     long time,
+                     double temperature,
+                     double humidity,
+                     double precipProbability,
+                     String summary,
+                     String timezone) {
+        this.icon = icon;
+        this.time = time;
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.precipProbability = precipProbability;
+        this.summary = summary;
+        this.timezone = timezone;
+    }
+
     public String getIcon() {
         return icon;
     }

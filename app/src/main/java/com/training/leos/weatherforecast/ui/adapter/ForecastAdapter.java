@@ -14,14 +14,8 @@ import com.training.leos.weatherforecast.data.model.Data;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-/**
- * Created by Leo on 29/10/2017.
- */
-
-public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForecastAdapater.ListViewHolder>{
+public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder> {
+    private static final String TAG = "ListViewForecastAdapter";
     private Context context;
     private ArrayList<Data> data = new ArrayList<>();
 
@@ -34,20 +28,22 @@ public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForec
         notifyDataSetChanged();
     }
 
-    public ListViewForecastAdapater(Context context){
+    public ForecastAdapter(Context context) {
         this.context = context;
     }
-    @Override
-    public ListViewForecastAdapater.ListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_list_weather, parent, false);
 
-        return new ListViewHolder(view);
+    @Override
+    public ForecastViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.item_weather, parent, false);
+
+        return new ForecastViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ListViewHolder holder, int position) {
+    public void onBindViewHolder(ForecastViewHolder holder, int position) {
         Data daily = getDailyData().get(position);
+
         holder.imgIcon.setImageDrawable(ContextCompat.getDrawable(context, daily.getIconId()));
         holder.tvDay.setText(daily.getFormatedDay());
         holder.tvTemperature.setText(daily.getTemperature() + "");
@@ -58,13 +54,16 @@ public class ListViewForecastAdapater extends RecyclerView.Adapter<ListViewForec
         return getDailyData().size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.iv_item_icon) ImageView imgIcon;
-        @BindView(R.id.tv_item_day) TextView tvDay;
-        @BindView(R.id.tv_item_temperature) TextView tvTemperature;
-        public ListViewHolder(View itemView) {
+    public class ForecastViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imgIcon;
+        private TextView tvDay;
+        private TextView tvTemperature;
+
+        public ForecastViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            imgIcon = (ImageView) itemView.findViewById(R.id.iv_item_icon);
+            tvDay = (TextView) itemView.findViewById(R.id.tv_item_day);
+            tvTemperature = (TextView) itemView.findViewById(R.id.tv_item_temperature);
         }
     }
 }

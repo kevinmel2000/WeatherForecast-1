@@ -1,14 +1,19 @@
 package com.training.leos.weatherforecast.data;
 
+import com.training.leos.weatherforecast.data.fakeAPI.FakeForecastAPI;
+import com.training.leos.weatherforecast.data.fakeAPI.FakeLocationAPI;
 import com.training.leos.weatherforecast.data.model.Forecast;
-import com.training.leos.weatherforecast.data.sharedPreference.ReminderPreference;
 
-public class DataManager implements DataContract.ClientAPI, DataContract.SharedPreference{
+import java.util.ArrayList;
+
+public class DataManager implements DataContract.Manager {
     private DaoContract daoContract;
+    private FakeLocationAPI fakeLocationAPI;
 
     // client API method
-    public DataManager(DaoContract daoContract){
-        this.daoContract = daoContract;
+    public DataManager(){
+        this.daoContract = new FakeForecastAPI();
+        this.fakeLocationAPI = new FakeLocationAPI();
     }
 
     @Override
@@ -16,26 +21,8 @@ public class DataManager implements DataContract.ClientAPI, DataContract.SharedP
         return daoContract.fetchForecast(location);
     }
 
-
-    // sharedPreferenced method
-    private ReminderPreference reminderPreference;
-
-    public DataManager(ReminderPreference reminderPreference){
-        this.reminderPreference = reminderPreference;
-    }
-
     @Override
-    public void setReminderTime(String time) {
-        reminderPreference.setTime(time);
-    }
-
-    @Override
-    public String getReminderTime() {
-        return reminderPreference.getTime();
-    }
-
-    @Override
-    public void clearReminderTime() {
-        reminderPreference.clear();
+    public ArrayList<String> getRecomendation(String query){
+        return fakeLocationAPI.fetchResult(query);
     }
 }

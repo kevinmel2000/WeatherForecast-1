@@ -1,20 +1,22 @@
 package com.training.leos.weatherforecast.presenter;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
+import com.training.leos.weatherforecast.MainContract;
 import com.training.leos.weatherforecast.data.DataContract;
 import com.training.leos.weatherforecast.data.DataManager;
 import com.training.leos.weatherforecast.data.model.Forecast;
-import com.training.leos.weatherforecast.data.retrofitAPI.RetrofitAPI;
 
-public class MainPresenter implements MainContract.MainPresenter {
+public class MainPresenter implements MainContract.Presenter {
 
-    private MainContract.MainActivity mainView;
-    private DataContract.ClientAPI clientManager;
+    private static final String TAG = "MainPresenter";
+    private MainContract.View view;
+    private DataContract.Manager dataManager;
 
-    public MainPresenter(MainContract.MainActivity mainView) {
-        this.mainView = mainView;
-        clientManager = new DataManager(new RetrofitAPI());
+    public MainPresenter(MainContract.View mainView) {
+        this.view = mainView;
+        dataManager = new DataManager();
     }
 
     @Override
@@ -28,7 +30,7 @@ public class MainPresenter implements MainContract.MainPresenter {
     public void onShowCurrently(Forecast forecast) {
         String timezone = forecast.getTimezone();
         forecast.getCurrently().setTimezone(timezone);
-        mainView.showCurrentWeather(forecast.getCurrently());
+        view.showCurrentWeather(forecast.getCurrently());
     }
 
     @Override
@@ -38,21 +40,27 @@ public class MainPresenter implements MainContract.MainPresenter {
         for (int i = 0; i < n; i++) {
             forecast.getDaily().getDailies().get(i).setTimezone(timezone);
         }
-        mainView.showDailyWeather(forecast.getDaily());
+        view.showDailyWeather(forecast.getDaily());
     }
 
     @Override
     public void onRequestFailure(String msg) {
-        mainView.showToast(msg);
+        view.showToast(msg);
+    }
+
+    @Override
+    public void onCheckRecomendation(String query) {
+        view.showRecomendationResult(dataManager.getRecomendation(query));
     }
 
     public class LoadForecast extends AsyncTask<String, Void, Forecast>{
         @Override
         protected Forecast doInBackground(String... params) {
-            return clientManager.getForecast(String.valueOf(params));
+            return dataManager.getForecast(String.valueOf(params));
         }
         @Override
         protected void onPostExecute(Forecast forecast) {
+            Log.w(TAG, "onPostExecute: " + forecast.getDaily().getDailies().size());
             if (forecast != null){
                 onShowCurrently(forecast);
                 onShowDaily(forecast);

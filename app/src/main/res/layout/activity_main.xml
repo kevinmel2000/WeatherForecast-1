@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,40 +8,84 @@
     android:orientation="vertical"
     tools:context="com.training.leos.weatherforecast.ui.MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/main_act_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="--"
-            app:subtitle="--"
-            app:titleTextAppearance="@style/TextStyle.h2"
-            app:subtitleTextAppearance="@style/TextStyle.h3.italic"
-            >
-        </android.support.v7.widget.Toolbar>
-    </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:padding="@dimen/size_16dp">
+
         <include
-            layout="@layout/main_current_weather"
+            layout="@layout/custom_current_weather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/size_8dp"
             android:layout_marginBottom="@dimen/size_8dp"
-            android:background="@color/colorWhiteText"/>
+            android:layout_marginTop="@dimen/size_8dp"
+            android:background="@color/colorWhiteText" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_weather"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/size_12dp"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"></android.support.v7.widget.RecyclerView>
+            app:layoutManager="android.support.v7.widget.GridLayoutManager" />
     </LinearLayout>
-</LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_Suggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_suggestion_divider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.4"
+                android:background="@color/cardview_dark_background"
+                android:clickable="true"/>
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main_act_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:subtitle="--"
+                app:subtitleTextAppearance="@style/TextStyle.h3.italic"
+                app:title="--"
+                app:titleTextAppearance="@style/TextStyle.h2" />
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/material_searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+</RelativeLayout>
